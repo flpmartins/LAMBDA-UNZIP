@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Lambda Function to Unzip S3 Objects
+
+Resources:
+  UnzipS3LambdaFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/handlers/unzip-s3-lambda.unzipS3LambdaHandler
+      Runtime: nodejs16.x
+      Timeout: 30
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref MyS3Bucket
+  MyS3Bucket:
+    Type: 'AWS::S3::Bucket'
